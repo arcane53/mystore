@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Simple Online Store</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a modern look */
+        body {
+            font-family: "Inter", sans-serif;
+        }
+
+        /* Simple animations for a better user experience */
+        @keyframes fade-in-down {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in-down {
+            animation: fade-in-down 0.8s ease-out forwards;
+        }
+
+        .animate-fade-in-up {
+            animation: fade-in-up 0.8s ease-out 0.2s forwards; /* Slight delay for subtitle and description */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+    <!-- Main container for all pages, hidden by default -->
+    <div id="app-container" class="w-full h-full">
+
+        <!-- Welcome Page Section -->
+        <section id="welcomePage" class="page bg-gradient-to-br from-purple-100 via-pink-50 to-blue-50 min-h-screen flex items-center justify-center p-4">
+            <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-md w-full text-center border border-gray-100 transform transition-all duration-300 hover:scale-105">
+                <h1 class="text-4xl font-extrabold text-gray-800 mb-4 animate-fade-in-down">
+                    👋 Welcome to <span class="text-indigo-600">Our Store</span>!
+                </h1>
+                <p class="text-lg text-gray-600 mb-6 animate-fade-in-up">
+                    Find everything you need, easily.
+                </p>
+                <p class="text-md text-gray-500 mb-8 leading-relaxed animate-fade-in-up">
+                    We offer a wide range of products just for you. Take a look around and discover something new!
+                </p>
+                <button onclick="showPage('productPage')" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-75">
+                    Start Shopping
+                </button>
+            </div>
+        </section>
+
+        <!-- Product Purchase Page Section -->
+        <section id="productPage" class="page hidden bg-gradient-to-br from-blue-100 via-green-50 to-teal-50 min-h-screen flex items-center justify-center p-4">
+            <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-lg w-full text-center border border-gray-100 transform transition-all duration-300 hover:scale-105">
+                <h1 class="text-3xl font-extrabold text-gray-800 mb-6">Our Amazing Widget</h1>
+
+                <!-- Product Image Placeholder -->
+                <img src="https://placehold.co/400x300/A78BFA/ffffff?text=Awesome+Widget" alt="Amazing Widget" class="w-full h-auto rounded-lg mb-6 shadow-md">
+
+                <!-- Product Description -->
+                <p class="text-lg text-gray-700 mb-4">
+                    This widget will make your life easier and more fun! It's super durable and packed with features.
+                </p>
+
+                <!-- Price -->
+                <p class="text-2xl font-bold text-indigo-600 mb-8">
+                    Price: $29.99
+                </p>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button onclick="showPage('thankYouPage')" class="inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-500 focus:ring-opacity-75">
+                        Buy Now!
+                    </button>
+                    <button onclick="showPage('welcomePage')" class="inline-block bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-gray-500 focus:ring-opacity-75">
+                        Continue Shopping
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Thank You Page Section -->
+        <section id="thankYouPage" class="page hidden bg-gradient-to-br from-green-100 via-blue-50 to-purple-50 min-h-screen flex items-center justify-center p-4">
+            <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-md w-full text-center border border-gray-100 transform transition-all duration-300 hover:scale-105">
+                <h1 class="text-4xl font-extrabold text-green-700 mb-4">
+                    🎉 Thank You! 🎉
+                </h1>
+                <p class="text-lg text-gray-700 mb-6">
+                    Your purchase was successful! We appreciate your business.
+                </p>
+                <p class="text-md text-gray-600 mb-8">
+                    You'll receive a confirmation email shortly.
+                </p>
+                <button onclick="showPage('welcomePage')" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-75">
+                    Back to Home
+                </button>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Function to show a specific page and hide others
+        function showPage(pageId) {
+            // Get all page sections
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                // Hide all pages
+                page.classList.add('hidden');
+            });
+
+            // Show the requested page
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.classList.remove('hidden');
+            }
+        }
+
+        // Show the welcome page when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('welcomePage');
+        });
+    </script>
+</body>
+</html>
